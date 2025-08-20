@@ -14,6 +14,7 @@ body {
   line-height: 1.6;
   color: #333;
   overflow-x: hidden;
+  background-color: #faf8f5; /* Added warm cream background for cafe vibes */
 }
 
 .container {
@@ -29,50 +30,63 @@ h3,
 h4 {
   font-family: "Playfair Display", serif;
   font-weight: 600;
+  color: #2c1810; /* Darker coffee brown for better readability */
 }
 
 h1 {
   font-size: 3.5rem;
   margin-bottom: 1rem;
+  letter-spacing: -0.02em; /* Tighter letter spacing for elegance */
 }
 
 h2 {
   font-size: 2.5rem;
   margin-bottom: 1rem;
   color: #8b4513;
+  position: relative;
+}
+
+/* Added decorative coffee bean elements to section headers */
+h2::before {
+  content: "☕";
+  position: absolute;
+  left: -40px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.5rem;
+  opacity: 0.6;
 }
 
 h3 {
   font-size: 1.5rem;
   margin-bottom: 0.5rem;
+  color: #5d3a1a; /* Warmer brown tone */
 }
 
 /* Section Headers */
 .section-header {
   text-align: center;
-  margin-bottom: 3rem;
+  margin-bottom: 4rem; /* Increased spacing for better breathing room */
+  position: relative;
 }
 
+/* Enhanced section divider with coffee-inspired design */
 .section-divider {
-  width: 60px;
-  height: 3px;
-  background: linear-gradient(90deg, #d4af37, #8b4513);
-  margin: 1rem auto;
+  width: 80px;
+  height: 4px;
+  background: linear-gradient(90deg, #d4af37, #8b4513, #d4af37);
+  margin: 1.5rem auto;
   border-radius: 2px;
   position: relative;
 }
 
-/* Added decorative elements to section divider */
 .section-divider::before,
 .section-divider::after {
-  content: "";
+  content: "●";
   position: absolute;
-  top: 50%;
-  width: 8px;
-  height: 8px;
-  background: #d4af37;
-  border-radius: 50%;
-  transform: translateY(-50%);
+  top: -8px;
+  color: #8b4513;
+  font-size: 20px;
 }
 
 .section-divider::before {
@@ -197,6 +211,7 @@ h3 {
   overflow: hidden;
 }
 
+/* Updated hero background to use the provided cafe interior image */
 .hero::before {
   content: "";
   position: absolute;
@@ -204,128 +219,119 @@ h3 {
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: url("/placeholder.svg?height=1080&width=1920");
+  background-image: url("https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-4UYi2Olk7ao5a2DiolSjnUig2SWfW2.png"); /* Updated to use the provided cafe image */
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   z-index: -2;
-  animation: heroBackgroundSlide 20s infinite;
 }
 
-@keyframes heroBackgroundSlide {
-  0%,
-  20% {
-    background-image: url("/placeholder.svg?height=1080&width=1920");
-  }
-  25%,
-  45% {
-    background-image: url("/placeholder.svg?height=1080&width=1920");
-  }
-  50%,
-  70% {
-    background-image: url("/placeholder.svg?height=1080&width=1920");
-  }
-  75%,
-  95% {
-    background-image: url("/placeholder.svg?height=1080&width=1920");
-  }
-}
-
-/* Added rotating background images */
-.hero-background {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  transition: opacity 2s ease-in-out;
-  z-index: -2;
-}
-
-.hero-background.active {
-  opacity: 1;
-}
-
-.hero-background:not(.active) {
-  opacity: 0;
-}
-
-/* Enhanced hero overlay with gradient */
+/* Enhanced hero overlay with warmer gradient */
 .hero-overlay {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(135deg, rgba(139, 69, 19, 0.7) 0%, rgba(0, 0, 0, 0.4) 50%, rgba(212, 175, 55, 0.6) 100%);
+  background: linear-gradient(
+    135deg,
+    rgba(44, 24, 16, 0.8) 0%,
+    rgba(139, 69, 19, 0.6) 30%,
+    rgba(0, 0, 0, 0.4) 70%,
+    rgba(212, 175, 55, 0.7) 100%
+  ); /* Warmer, more sophisticated gradient */
   z-index: -1;
 }
 
+/* Improved hero content alignment and spacing */
 .hero-content {
   position: relative;
   z-index: 1;
-  max-width: 800px;
+  max-width: 900px;
   padding: 0 2rem;
-  animation: heroFadeIn 1.5s ease-out;
+  animation: heroFadeIn 2s ease-out;
+  text-align: center;
 }
 
-/* Added hero animation */
+/* Enhanced hero animation */
 @keyframes heroFadeIn {
   0% {
     opacity: 0;
-    transform: translateY(30px);
+    transform: translateY(50px) scale(0.95);
   }
   100% {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateY(0) scale(1);
   }
 }
 
+/* Enhanced hero title with better alignment and cafe-inspired styling */
 .hero-content h1 {
-  font-size: 4.5rem;
-  margin-bottom: 1.5rem;
-  text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.7);
+  font-size: 5rem;
+  margin-bottom: 2rem;
+  text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.8);
   font-weight: 700;
   line-height: 1.1;
-  /* Added text gradient effect */
-  background: linear-gradient(45deg, #fff, #f0f0f0);
+  letter-spacing: -0.02em;
+  background: linear-gradient(45deg, #fff 0%, #f5f5dc 50%, #fff 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  position: relative;
 }
 
+/* Added decorative elements around the main title */
+.hero-content h1::before,
+.hero-content h1::after {
+  content: "✦";
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 2rem;
+  color: #d4af37;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.hero-content h1::before {
+  left: -60px;
+}
+
+.hero-content h1::after {
+  right: -60px;
+}
+
+/* Enhanced hero paragraph with better spacing and typography */
 .hero-content p {
-  font-size: 1.3rem;
-  margin-bottom: 2.5rem;
-  max-width: 600px;
+  font-size: 1.4rem;
+  margin-bottom: 3rem;
+  max-width: 700px;
   margin-left: auto;
   margin-right: auto;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
-  line-height: 1.6;
-  font-weight: 300;
+  text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.8);
+  line-height: 1.7;
+  font-weight: 400;
+  font-style: italic;
+  color: #f5f5dc;
+  padding: 0 1rem;
 }
 
 .cta-button {
-  background: linear-gradient(135deg, #d4af37 0%, #b8860b 100%);
+  background: linear-gradient(135deg, #d4af37 0%, #b8860b 50%, #8b4513 100%);
   color: white;
-  padding: 18px 40px;
-  border: none;
+  padding: 20px 50px;
+  border: 3px solid rgba(255, 255, 255, 0.3);
   border-radius: 50px;
-  font-size: 1.1rem;
-  font-weight: 600;
+  font-size: 1.2rem;
+  font-weight: 700;
   cursor: pointer;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   text-transform: uppercase;
-  letter-spacing: 1.5px;
+  letter-spacing: 1px;
   position: relative;
   overflow: hidden;
-  box-shadow: 0 8px 25px rgba(212, 175, 55, 0.3);
+  box-shadow: 0 8px 25px rgba(139, 69, 19, 0.4);
 }
 
-/* Added button hover effects */
 .cta-button::before {
   content: "";
   position: absolute;
@@ -333,7 +339,7 @@ h3 {
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
   transition: left 0.6s;
 }
 
@@ -342,9 +348,9 @@ h3 {
 }
 
 .cta-button:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 12px 35px rgba(212, 175, 55, 0.5);
-  background: linear-gradient(135deg, #e6c547 0%, #c9941c 100%);
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 12px 35px rgba(139, 69, 19, 0.6);
+  border-color: rgba(255, 255, 255, 0.6);
 }
 
 /* About Section */
@@ -412,7 +418,7 @@ h3 {
 .specialties {
   margin-top: 2.5rem;
   padding: 2rem;
-  background: rgba(255, 255, 255, 0.7);
+  background: rgba(255, 248, 220, 0.7);
   border-radius: 15px;
   box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
 }
