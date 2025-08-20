@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Updated title and branding for Brewski Cafe -->
+    <title>Brewski Cafe - Where Coffee Meets Community</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Open+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <!-- Updated cafe name to Brewski Cafe -->
+                <h2>Brewski Cafe</h2>
+            </div>
+            <ul class="nav-menu" id="nav-menu">
+                <li class="nav-item">
+                    <a href="#home" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#about" class="nav-link">About Us</a>
+                </li>
+                <!-- Added photo gallery navigation -->
+                <li class="nav-item">
+                    <a href="#gallery" class="nav-link">Gallery</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#menu" class="nav-link">Menu</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#reviews" class="nav-link">Reviews</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#location" class="nav-link">Location</a>
+                </li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <!-- Updated tagline and description with provided content -->
+            <h1>Where Coffee Meets Community</h1>
+            <p>A cozy, contemporary spot in the heart of Prayagraj, offering artisanal coffees, refreshing beverages, and a delectable selection of global and Indian cuisine</p>
+            <button class="cta-button" onclick="scrollToSection('location')">Visit Us Today</button>
+        </div>
+        <div class="hero-overlay"></div>
+    </section>
+
+    <!-- About Us Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <div class="section-header">
+                <h2>About Brewski Cafe</h2>
+                <div class="section-divider"></div>
+            </div>
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>Our Story</h3>
+                    <!-- Updated story with provided bio content -->
+                    <p>Brewski Cafe Prayagraj is a cozy, contemporary spot in the heart of Prayagraj, offering a blend of artisanal coffees, refreshing beverages, and a delectable selection of global and Indian cuisine. Our cafe is designed as a vibrant social hub where friends, families, and coffee lovers come together to unwind, work, and share memorable moments.</p>
+                    <p>A haven for coffee enthusiasts and foodies, Brewski Cafe Prayagraj brings a modern twist to the classic cafe experience. We pride ourselves on sourcing quality ingredients, brewing perfection in every cup, and creating a welcoming space for creativity and connection. Whether you crave a perfectly brewed espresso, a hearty meal, or just good company, Brewski Cafe is your go-to neighborhood destination.</p>
+                    
+                    <!-- Added vision statement section -->
+                    <div class="vision-section">
+                        <h4>Our Vision</h4>
+                        <p>Our vision at Brewski Cafe Prayagraj is to be the city's favorite gathering place—celebrating community, creativity, and the art of brewing. We aim to inspire smiles, nurture friendships, and set new standards for cafe culture, one cup at a time. With a commitment to excellence and local spirit, we hope to foster lasting memories and a sense of belonging for all who walk through our doors.</p>
+                    </div>
+                    
+                    <div class="specialties">
+                        <h4>What Makes Us Special:</h4>
+                        <ul>
+                            <li>Single-Origin Coffee Beans</li>
+                            <li>House-Made Pastries & Desserts</li>
+                            <li>Cozy Community Atmosphere</li>
+                            <li>Local Art & Live Music</li>
+                            <li>Sustainable & Eco-Friendly Practices</li>
+                            <li>Global & Indian Cuisine Selection</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="about-images">
+                    <!-- Added multiple images for visual appeal -->
+                    <div class="about-image-grid">
+                        <img src="/placeholder.svg?height=300&width=400" alt="Brewski Cafe Interior">
+                        <img src="/placeholder.svg?height=300&width=400" alt="Expert Barista at Work">
+                        <img src="/placeholder.svg?height=300&width=400" alt="Fresh Pastries Display">
+                        <img src="/placeholder.svg?height=300&width=400" alt="Happy Customers">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Added new photo gallery section -->
+    <section id="gallery" class="gallery">
+        <div class="container">
+            <div class="section-header">
+                <h2>Experience Brewski</h2>
+                <div class="section-divider"></div>
+                <p>Take a visual journey through our cafe</p>
+            </div>
+            <div class="gallery-grid">
+                <div class="gallery-item large">
+                    <img src="/placeholder.svg?height=400&width=600" alt="Cafe Exterior">
+                    <div class="gallery-overlay">
+                        <h3>Welcoming Exterior</h3>
+                        <p>Perfect for outdoor dining</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="/placeholder.svg?height=300&width=400" alt="Coffee Equipment">
+                    <div class="gallery-overlay">
+                        <h3>Premium Equipment</h3>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="/placeholder.svg?height=300&width=400" alt="Latte Art">
+                    <div class="gallery-overlay">
+                        <h3>Artisan Coffee</h3>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="/placeholder.svg?height=300&width=400" alt="Fresh Pastries">
+                    <div class="gallery-overlay">
+                        <h3>Fresh Daily</h3>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="/placeholder.svg?height=300&width=400" alt="Reading Corner">
+                    <div class="gallery-overlay">
+                        <h3>Cozy Corners</h3>
+                    </div>
+                </div>
+                <div class="gallery-item large">
+                    <img src="/placeholder.svg?height=400&width=600" alt="Community Gathering">
+                    <div class="gallery-overlay">
+                        <h3>Community Hub</h3>
+                        <p>Where friendships brew</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section id="menu" class="menu">
+        <div class="container">
+            <div class="section-header">
+                <h2>Our Signature Menu</h2>
+                <div class="section-divider"></div>
+                <p>Crafted with passion, served with love</p>
+            </div>
+            <!-- Updated menu section to showcase highlights and link to full menu -->
+            <div class="menu-preview">
+                <p class="menu-intro">Discover our most popular items, or explore our complete collection of over 70 delicious offerings.</p>
+                <a href="menu.html" class="view-full-menu-btn">View Full Menu (70+ Items)</a>
+            </div>
+            <div class="menu-grid">
+                <div class="menu-item">
+                    <div class="menu-image">
+                        <img src="/placeholder.svg?height=250&width=300" alt="Signature Cappuccino">
+                        <div class="price-badge">$4.50</div>
+                    </div>
+                    <div class="menu-content">
+                        <h3>Brewski Signature Cappuccino</h3>
+                        <p>Rich espresso with perfectly steamed milk and signature latte art</p>
+                    </div>
+                </div>
+
+                <div class="menu-item">
+                    <div class="menu-image">
+                        <img src="/placeholder.svg?height=250&width=300" alt="Avocado Toast Supreme">
+                        <div class="price-badge">$9.99</div>
+                    </div>
+                    <div class="menu-content">
+                        <h3>Avocado Toast Supreme</h3>
+                        <p>Multigrain bread topped with smashed avocado, poached egg, and microgreens</p>
+                    </div>
+                </div>
+
+                <div class="menu-item">
+                    <div class="menu-image">
+                        <img src="/placeholder.svg?height=250&width=300" alt="Artisan Chocolate Croissant">
+                        <div class="price-badge">$4.25</div>
+                    </div>
+                    <div class="menu-content">
+                        <h3>Artisan Chocolate Croissant</h3>
+                        <p>Buttery, flaky pastry filled with premium Belgian chocolate</p>
+                    </div>
+                </div>
+
+                <div class="menu-item">
+                    <div class="menu-image">
+                        <img src="/placeholder.svg?height=250&width=300" alt="Brewski Club Sandwich">
+                        <div class="price-badge">$13.50</div>
+                    </div>
+                    <div class="menu-content">
+                        <h3>Brewski Club Sandwich</h3>
+                        <p>Grilled chicken, bacon, fresh lettuce, tomato, and our special sauce</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Customer Reviews Section -->
+    <section id="reviews" class="reviews">
+        <div class="container">
+            <div class="section-header">
+                <h2>What Our Community Says</h2>
+                <div class="section-divider"></div>
+            </div>
+            <div class="reviews-grid">
+                <div class="review-card">
+                    <!-- Added customer photos to reviews -->
+                    <div class="reviewer-photo">
+                        <img src="/placeholder.svg?height=80&width=80" alt="Sarah Johnson">
+                    </div>
+                    <div class="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p>"Brewski Cafe is my daily sanctuary! The coffee is exceptional and the atmosphere makes you feel like family. Best cappuccino in town!"</p>
+                    <div class="reviewer">
+                        <h4>Sarah Johnson</h4>
+                        <span>Regular Customer</span>
+                    </div>
+                </div>
+
+                <div class="review-card">
+                    <div class="reviewer-photo">
+                        <img src="/placeholder.svg?height=80&width=80" alt="Mike Chen">
+                    </div>
+                    <div class="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p>"Outstanding food quality and incredible service! The avocado toast is a masterpiece. Brewski has become my go-to spot for meetings."</p>
+                    <div class="reviewer">
+                        <h4>Mike Chen</h4>
+                        <span>Food Blogger</span>
+                    </div>
+                </div>
+
+                <div class="review-card">
+                    <div class="reviewer-photo">
+                        <img src="/placeholder.svg?height=80&width=80" alt="Emily Rodriguez">
+                    </div>
+                    <div class="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="far fa-star"></i>
+                    </div>
+                    <p>"Perfect workspace with amazing WiFi and the most comfortable seating. The smoothie bowls are Instagram-worthy and delicious!"</p>
+                    <div class="reviewer">
+                        <h4>Emily Rodriguez</h4>
+                        <span>Freelancer</span>
+                    </div>
+                </div>
+
+                <div class="review-card">
+                    <div class="reviewer-photo">
+                        <img src="/placeholder.svg?height=80&width=80" alt="David Thompson">
+                    </div>
+                    <div class="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p>"Family-friendly atmosphere with something for everyone. Kids love the pancakes, I love the coffee. Brewski brings our community together!"</p>
+                    <div class="reviewer">
+                        <h4>David Thompson</h4>
+                        <span>Local Resident</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Location Section -->
+    <section id="location" class="location">
+        <div class="container">
+            <div class="section-header">
+                <h2>Find Us</h2>
+                <div class="section-divider"></div>
+            </div>
+            <div class="location-content">
+                <div class="location-info">
+                    <div class="info-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <h3>Address</h3>
+                            <!-- Updated address for Prayagraj location -->
+                            <p>Civil Lines<br>Prayagraj, Uttar Pradesh<br>India 211001</p>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-phone"></i>
+                        <div>
+                            <h3>Phone</h3>
+                            <p>+91 98765 43210</p>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-clock"></i>
+                        <div>
+                            <h3>Opening Hours</h3>
+                            <p>Monday - Saturday: 10:00 AM - 10:00 PM<br>
+                               Sunday: 10:00 AM - 10:00 PM</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="map-container">
+                    <iframe 
+                        src="hhttps://www.google.co.in/maps/place/Brewski+Cafe/@25.4764037,81.8505993,17z/data=!3m1!4b1!4m6!3m5!1s0x399acb2062e16723:0x50b4ef3d3de4d359!8m2!3d25.4763989!4d81.8531742!16s%2Fg%2F11wn_l7vnw?entry=ttu&g_ep=EgoyMDI1MDgxMy4wIKXMDSoASAFQAw%3D%3D"
+                        width="100%" 
+                        height="300" 
+                        style="border:0;" 
+                        allowfullscreen="" 
+                        loading="lazy" 
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <!-- Updated footer branding -->
+                    <h3>Brewski Cafe</h3>
+                    <p>Step in for a warm ambiance, attentive service, and flavors that spark joy in every visit.</p>
+                    <div class="social-icons">
+                        <a href="https://www.facebook.com/profile.php?id=61572898914876" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.instagram.com/brewski_cafe?igsh=MTlpbmNxbHdhdzhpNg==" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+  
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact Info</h4>
+                        <p><i class="fas fa-map-marker-alt"></i> 441, near Fawwara Chauraha, Mumfordganj, Prayagraj, Uttar Pradesh 211002</p>
+                        <p><i class="fas fa-phone"></i> 07009002006</p>
+                   
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#gallery">Gallery</a></li>
+                        <li><a href="#menu">Menu</a></li>
+                        <li><a href="#reviews">Reviews</a></li>
+                        <li><a href="#location">Location</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <!-- Updated copyright -->
+                <p>&copy; 2025 Brewski Cafe. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
