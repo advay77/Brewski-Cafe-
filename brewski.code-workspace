@@ -1,0 +1,15 @@
+{
+	"folders": [
+		{
+			"name": "brewski",
+			"path": "."
+		},
+		{
+			"name": "Menu Item Images",
+			"path": "C:/Users/Advay Anand/Downloads/Menu Item Images"
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "brewski"
+	}
+}
