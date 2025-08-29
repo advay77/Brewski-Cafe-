@@ -1,7 +1,5 @@
 <!-- Banner with cafe theme -->
-<p align="center">
-  <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80" alt="Cafe Banner" width="100%" style="border-radius:16px;">
-</p>
+
 
 <h1 align="center" style="color:#7B3F00; font-family: 'Georgia', serif;">
   ☕️ Brewski Cafe
