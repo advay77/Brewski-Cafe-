@@ -123,268 +123,120 @@ document.querySelectorAll(".order-btn").forEach((button) => {
   })
 })
 
-const heroBackgrounds = [
-  "/placeholder.svg?height=1080&width=1920",
-  "/placeholder.svg?height=1080&width=1920",
-  "/placeholder.svg?height=1080&width=1920",
-  "/placeholder.svg?height=1080&width=1920",
-  "/placeholder.svg?height=1080&width=1920",
-]
-
-let currentBackgroundIndex = 0
-
-function createHeroBackgrounds() {
+// Function to remove any hero rotating backgrounds injected by previous logic
+function removeHeroBackgrounds() {
   const hero = document.querySelector(".hero")
-
-  // Remove existing background style
+  if (!hero) return
+  // Remove any dynamically added background layers
+  hero.querySelectorAll(".hero-background").forEach((el) => el.remove())
+  // Ensure no background style remains
   hero.style.background = "none"
-
-  // Create background elements
-  heroBackgrounds.forEach((bg, index) => {
-    const bgElement = document.createElement("div")
-    bgElement.className = "hero-background"
-    bgElement.style.backgroundImage = `url('${bg}')`
-
-    if (index === 0) {
-      bgElement.classList.add("active")
-    }
-
-    hero.insertBefore(bgElement, hero.firstChild)
-  })
 }
 
-function rotateHeroBackground() {
-  const backgrounds = document.querySelectorAll(".hero-background")
+// Function to add Experience section visibility hook to enable section-specific animations when in view
+function initExperienceAnimations() {
+  const expSection = document.querySelector(".experience-highlight")
+  if (!expSection) return
 
-  // Remove active class from current background
-  backgrounds[currentBackgroundIndex].classList.remove("active")
+  const obs = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          expSection.classList.add("exp-active")
+        } else {
+          expSection.classList.remove("exp-active")
+        }
+      })
+    },
+    { threshold: 0.15 },
+  )
 
-  // Move to next background
-  currentBackgroundIndex = (currentBackgroundIndex + 1) % heroBackgrounds.length
-
-  // Add active class to new background
-  backgrounds[currentBackgroundIndex].classList.add("active")
+  obs.observe(expSection)
 }
 
-function createGalleryLightbox() {
-  // Create lightbox overlay
-  const lightbox = document.createElement("div")
-  lightbox.className = "lightbox-overlay"
-  lightbox.style.cssText = `
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.9);
-    display: none;
-    justify-content: center;
-    align-items: center;
-    z-index: 9999;
-    backdrop-filter: blur(10px);
-  `
+// Function to add a gentle, GIF-like image rotator for the About image grid (no effect if reduced-motion)
+function initAboutImageRotator() {
+  const grid = document.querySelector(".about-image-grid")
+  if (!grid) return
 
-  // Create lightbox content
-  const lightboxContent = document.createElement("div")
-  lightboxContent.className = "lightbox-content"
-  lightboxContent.style.cssText = `
-    max-width: 90%;
-    max-height: 90%;
-    position: relative;
-    animation: lightboxFadeIn 0.3s ease;
-  `
+  const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches
+  if (prefersReduced) return
 
-  // Create lightbox image
-  const lightboxImg = document.createElement("img")
-  lightboxImg.style.cssText = `
-    width: 100%;
-    height: auto;
-    border-radius: 15px;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-  `
+  // Require at least 3 images to rotate smoothly
+  const imgs = Array.from(grid.querySelectorAll("img"))
+  if (imgs.length < 3) return
 
-  // Create close button
-  const closeBtn = document.createElement("button")
-  closeBtn.innerHTML = "×"
-  closeBtn.style.cssText = `
-    position: absolute;
-    top: -15px;
-    right: -15px;
-    width: 40px;
-    height: 40px;
-    border: none;
-    border-radius: 50%;
-    background: #d4af37;
-    color: white;
-    font-size: 24px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.3s ease;
-  `
-
-  // Add CSS animation
-  const style = document.createElement("style")
-  style.textContent = `
-    @keyframes lightboxFadeIn {
-      from { opacity: 0; transform: scale(0.8); }
-      to { opacity: 1; transform: scale(1); }
-    }
-  `
-  document.head.appendChild(style)
-
-  // Assemble lightbox
-  lightboxContent.appendChild(lightboxImg)
-  lightboxContent.appendChild(closeBtn)
-  lightbox.appendChild(lightboxContent)
-  document.body.appendChild(lightbox)
-
-  // Close lightbox functionality
-  const closeLightbox = () => {
-    lightbox.style.display = "none"
-    document.body.style.overflow = "auto"
+  const cycle = () => {
+    const first = grid.querySelector("img")
+    if (!first) return
+    // Fade out, move to end, fade in
+    first.style.transition = "opacity 300ms ease"
+    first.style.opacity = "0"
+    setTimeout(() => {
+      grid.appendChild(first)
+      requestAnimationFrame(() => {
+        first.style.opacity = "1"
+      })
+    }, 280)
   }
 
-  closeBtn.addEventListener("click", closeLightbox)
-  lightbox.addEventListener("click", (e) => {
-    if (e.target === lightbox) closeLightbox()
-  })
-
-  // ESC key to close
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape" && lightbox.style.display === "flex") {
-      closeLightbox()
-    }
-  })
-
-  // Add click handlers to gallery items
-  document.querySelectorAll(".gallery-item").forEach((item) => {
-    item.addEventListener("click", () => {
-      const img = item.querySelector("img")
-      const overlay = item.querySelector(".gallery-overlay")
-
-      lightboxImg.src = img.src
-      lightboxImg.alt = img.alt
-      lightbox.style.display = "flex"
-      document.body.style.overflow = "hidden"
-
-      // Add ripple effect
-      const ripple = document.createElement("div")
-      ripple.style.cssText = `
-        position: absolute;
-        border-radius: 50%;
-        background: rgba(212, 175, 55, 0.3);
-        transform: scale(0);
-        animation: ripple 0.6s linear;
-        pointer-events: none;
-      `
-
-      const rect = item.getBoundingClientRect()
-      const size = Math.max(rect.width, rect.height)
-      ripple.style.width = ripple.style.height = size + "px"
-      ripple.style.left = rect.width / 2 - size / 2 + "px"
-      ripple.style.top = rect.height / 2 - size / 2 + "px"
-
-      item.style.position = "relative"
-      item.appendChild(ripple)
-
-      setTimeout(() => ripple.remove(), 600)
-    })
-  })
-
-  // Add ripple animation CSS
-  const rippleStyle = document.createElement("style")
-  rippleStyle.textContent = `
-    @keyframes ripple {
-      to { transform: scale(4); opacity: 0; }
-    }
-  `
-  document.head.appendChild(rippleStyle)
-}
-
-function initLazyLoading() {
-  const imageObserver = new IntersectionObserver((entries, observer) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        const img = entry.target
-        img.src = img.dataset.src || img.src
-        img.classList.remove("loading")
-        img.classList.add("loaded")
-        observer.unobserve(img)
-      }
-    })
-  })
-
-  document.querySelectorAll("img").forEach((img) => {
-    imageObserver.observe(img)
-    img.classList.add("loading")
-  })
-}
-
-function enhanceReviewCards() {
-  document.querySelectorAll(".review-card").forEach((card) => {
-    card.addEventListener("mouseenter", () => {
-      const photo = card.querySelector(".reviewer-photo img")
-      if (photo) {
-        photo.style.transform = "scale(1.1) rotate(5deg)"
-        photo.style.filter = "brightness(1.1) saturate(1.2)"
-      }
-
-      const stars = card.querySelectorAll(".stars i")
-      stars.forEach((star, index) => {
-        setTimeout(() => {
-          star.style.transform = "scale(1.2) rotate(360deg)"
-          star.style.color = "#f4d03f"
-        }, index * 100)
-      })
-    })
-
-    card.addEventListener("mouseleave", () => {
-      const photo = card.querySelector(".reviewer-photo img")
-      if (photo) {
-        photo.style.transform = "scale(1) rotate(0deg)"
-        photo.style.filter = "brightness(1) saturate(1)"
-      }
-
-      const stars = card.querySelectorAll(".stars i")
-      stars.forEach((star) => {
-        star.style.transform = "scale(1) rotate(0deg)"
-        star.style.color = "#d4af37"
-      })
-    })
-  })
-}
-
-function enhanceMenuItems() {
-  document.querySelectorAll(".menu-item").forEach((item) => {
-    const img = item.querySelector(".menu-image img")
-    const priceBadge = item.querySelector(".price-badge")
-
-    item.addEventListener("mouseenter", () => {
-      if (priceBadge) {
-        priceBadge.style.transform = "scale(1.1) rotate(-5deg)"
-        priceBadge.style.boxShadow = "0 8px 25px rgba(212, 175, 55, 0.6)"
-      }
-    })
-
-    item.addEventListener("mouseleave", () => {
-      if (priceBadge) {
-        priceBadge.style.transform = "scale(1) rotate(0deg)"
-        priceBadge.style.boxShadow = "0 4px 15px rgba(212, 175, 55, 0.4)"
-      }
-    })
-  })
+  // Rotate every 4 seconds
+  setInterval(cycle, 4000)
 }
 
 // Initialize hero backgrounds and start rotation
 document.addEventListener("DOMContentLoaded", () => {
-  createHeroBackgrounds()
-  createGalleryLightbox()
-  initLazyLoading()
-  enhanceReviewCards()
-  enhanceMenuItems()
+  // Ensure hero rotating backgrounds are fully removed per latest design
+  removeHeroBackgrounds()
 
+  // Progressive enhancements
+  initExperienceAnimations()
+  initAboutImageRotator()
+
+  const heroBackgrounds = [
+    "/placeholder.svg?height=1080&width=1920",
+    "/placeholder.svg?height=1080&width=1920",
+    "/placeholder.svg?height=1080&width=1920",
+    "/placeholder.svg?height=1080&width=1920",
+    "/placeholder.svg?height=1080&width=1920",
+  ]
+
+  let currentBackgroundIndex = 0
+
+  function createHeroBackgrounds() {
+    const hero = document.querySelector(".hero")
+
+    // Remove existing background style
+    hero.style.background = "none"
+
+    // Create background elements
+    heroBackgrounds.forEach((bg, index) => {
+      const bgElement = document.createElement("div")
+      bgElement.className = "hero-background"
+      bgElement.style.backgroundImage = `url('${bg}')`
+
+      if (index === 0) {
+        bgElement.classList.add("active")
+      }
+
+      hero.insertBefore(bgElement, hero.firstChild)
+    })
+  }
+
+  function rotateHeroBackground() {
+    const backgrounds = document.querySelectorAll(".hero-background")
+
+    // Remove active class from current background
+    backgrounds[currentBackgroundIndex].classList.remove("active")
+
+    // Move to next background
+    currentBackgroundIndex = (currentBackgroundIndex + 1) % heroBackgrounds.length
+
+    // Add active class to new background
+    backgrounds[currentBackgroundIndex].classList.add("active")
+  }
+
+  createHeroBackgrounds()
   // Rotate background every 5 seconds
   setInterval(rotateHeroBackground, 5000)
 
@@ -585,32 +437,28 @@ function initMenuFilters() {
 
 // Order modal functionality
 function showOrderOptions(button) {
-  // Show modal popup for order options
-  const modal = document.getElementById('orderModal');
-  modal.style.display = 'block';
-  document.body.style.overflow = 'hidden';
+  const modal = document.getElementById("orderModal")
+  const itemName = button.closest(".full-menu-item").querySelector("h3").textContent
 
-  // Add click handlers for modal buttons
-  const zomatoBtn = modal.querySelector('.zomato');
-  const swiggyBtn = modal.querySelector('.swiggy');
-  zomatoBtn.onclick = function(e) {
-    window.open('https://zomato.onelink.me/xqzv/aixc31p6', '_blank');
-    closeOrderModal();
-  };
-  swiggyBtn.onclick = function(e) {
-    window.open('https://www.swiggy.com/menu/1091562?source=sharing', '_blank');
-    closeOrderModal();
-  };
+  // Add item name to modal if needed
+  const modalTitle = modal.querySelector("h3")
+  modalTitle.textContent = `Order ${itemName}`
+
+  modal.style.display = "block"
+  document.body.style.overflow = "hidden"
+
+  // Add click animation to button
+  button.style.transform = "scale(0.95)"
+  setTimeout(() => {
+    button.style.transform = ""
+  }, 150)
 }
+
 function closeOrderModal() {
-  const modal = document.getElementById('orderModal');
-  modal.style.display = 'none';
-  document.body.style.overflow = 'auto';
-}
-
-// closeOrderModal removed as modal is no longer used
+  const modal = document.getElementById("orderModal")
+  modal.style.display = "none"
   document.body.style.overflow = "auto"
-
+}
 
 // Enhanced menu item interactions
 function enhanceFullMenuItems() {
@@ -771,3 +619,217 @@ document.addEventListener("DOMContentLoaded", () => {
     })
   })
 })
+
+// Create lightbox overlay
+function createGalleryLightbox() {
+  const lightbox = document.createElement("div")
+  lightbox.className = "lightbox-overlay"
+  lightbox.style.cssText = `
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    backdrop-filter: blur(10px);
+  `
+
+  // Create lightbox content
+  const lightboxContent = document.createElement("div")
+  lightboxContent.className = "lightbox-content"
+  lightboxContent.style.cssText = `
+    max-width: 90%;
+    max-height: 90%;
+    position: relative;
+    animation: lightboxFadeIn 0.3s ease;
+  `
+
+  // Create lightbox image
+  const lightboxImg = document.createElement("img")
+  lightboxImg.style.cssText = `
+    width: 100%;
+    height: auto;
+    border-radius: 15px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  `
+
+  // Create close button
+  const closeBtn = document.createElement("button")
+  closeBtn.innerHTML = "×"
+  closeBtn.style.cssText = `
+    position: absolute;
+    top: -15px;
+    right: -15px;
+    width: 40px;
+    height: 40px;
+    border: none;
+    border-radius: 50%;
+    background: #d4af37;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+  `
+
+  // Add CSS animation
+  const style = document.createElement("style")
+  style.textContent = `
+    @keyframes lightboxFadeIn {
+      from { opacity: 0; transform: scale(0.8); }
+      to { opacity: 1; transform: scale(1); }
+    }
+  `
+  document.head.appendChild(style)
+
+  // Assemble lightbox
+  lightboxContent.appendChild(lightboxImg)
+  lightboxContent.appendChild(closeBtn)
+  lightbox.appendChild(lightboxContent)
+  document.body.appendChild(lightbox)
+
+  // Close lightbox functionality
+  const closeLightbox = () => {
+    lightbox.style.display = "none"
+    document.body.style.overflow = "auto"
+  }
+
+  closeBtn.addEventListener("click", closeLightbox)
+  lightbox.addEventListener("click", (e) => {
+    if (e.target === lightbox) closeLightbox()
+  })
+
+  // ESC key to close
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && lightbox.style.display === "flex") {
+      closeLightbox()
+    }
+  })
+
+  // Add click handlers to gallery items
+  document.querySelectorAll(".gallery-item").forEach((item) => {
+    item.addEventListener("click", () => {
+      const img = item.querySelector("img")
+      const overlay = item.querySelector(".gallery-overlay")
+
+      lightboxImg.src = img.src
+      lightboxImg.alt = img.alt
+      lightbox.style.display = "flex"
+      document.body.style.overflow = "hidden"
+
+      // Add ripple effect
+      const ripple = document.createElement("div")
+      ripple.style.cssText = `
+        position: absolute;
+        border-radius: 50%;
+        background: rgba(212, 175, 55, 0.3);
+        transform: scale(0);
+        animation: ripple 0.6s linear;
+        pointer-events: none;
+      `
+
+      const rect = item.getBoundingClientRect()
+      const size = Math.max(rect.width, rect.height)
+      ripple.style.width = ripple.style.height = size + "px"
+      ripple.style.left = rect.width / 2 - size / 2 + "px"
+      ripple.style.top = rect.height / 2 - size / 2 + "px"
+
+      item.style.position = "relative"
+      item.appendChild(ripple)
+
+      setTimeout(() => ripple.remove(), 600)
+    })
+  })
+
+  // Add ripple animation CSS
+  const rippleStyle = document.createElement("style")
+  rippleStyle.textContent = `
+    @keyframes ripple {
+      to { transform: scale(4); opacity: 0; }
+    }
+  `
+  document.head.appendChild(rippleStyle)
+}
+
+// Initialize lazy loading
+function initLazyLoading() {
+  const imageObserver = new IntersectionObserver((entries, observer) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        const img = entry.target
+        img.src = img.dataset.src || img.src
+        img.classList.remove("loading")
+        img.classList.add("loaded")
+        observer.unobserve(img)
+      }
+    })
+  })
+
+  document.querySelectorAll("img").forEach((img) => {
+    imageObserver.observe(img)
+    img.classList.add("loading")
+  })
+}
+
+// Enhance review cards
+function enhanceReviewCards() {
+  document.querySelectorAll(".review-card").forEach((card) => {
+    card.addEventListener("mouseenter", () => {
+      const photo = card.querySelector(".reviewer-photo img")
+      if (photo) {
+        photo.style.transform = "scale(1.1) rotate(5deg)"
+        photo.style.filter = "brightness(1.1) saturate(1.2)"
+      }
+
+      const stars = card.querySelectorAll(".stars i")
+      stars.forEach((star, index) => {
+        setTimeout(() => {
+          star.style.transform = "scale(1.2) rotate(360deg)"
+          star.style.color = "#f4d03f"
+        }, index * 100)
+      })
+    })
+
+    card.addEventListener("mouseleave", () => {
+      const photo = card.querySelector(".reviewer-photo img")
+      if (photo) {
+        photo.style.transform = "scale(1) rotate(0deg)"
+        photo.style.filter = "brightness(1) saturate(1)"
+      }
+
+      const stars = card.querySelectorAll(".stars i")
+      stars.forEach((star) => {
+        star.style.transform = "scale(1) rotate(0deg)"
+        star.style.color = "#d4af37"
+      })
+    })
+  })
+}
+
+// Enhance menu items
+function enhanceMenuItems() {
+  document.querySelectorAll(".menu-item").forEach((item) => {
+    const img = item.querySelector(".menu-image img")
+    const priceBadge = item.querySelector(".price-badge")
+
+    item.addEventListener("mouseenter", () => {
+      if (priceBadge) {
+        priceBadge.style.transform = "scale(1.1) rotate(-5deg)"
+        priceBadge.style.boxShadow = "0 8px 25px rgba(212, 175, 55, 0.6)"
+      }
+    })
+
+    item.addEventListener("mouseleave", () => {
+      if (priceBadge) {
+        priceBadge.style.transform = "scale(1) rotate(0deg)"
+        priceBadge.style.boxShadow = "0 4px 15px rgba(212, 175, 55, 0.4)"
+      }
+    })
+  })
+}
