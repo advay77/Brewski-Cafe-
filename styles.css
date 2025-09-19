@@ -17,6 +17,79 @@ body {
   background-color: #faf8f5; /* Added warm cream background for cafe vibes */
 }
 
+/* Mission & Vision Box - Styled to match 'What Makes Us Special' */
+.mission-vision-box {
+  background: #fff9f0;
+  border-radius: 8px;
+  padding: 25px;
+  margin-top: 30px;
+  box-shadow: 0 4px 15px rgba(139, 69, 19, 0.1);
+  border: 1px solid #f0e6d2;
+  position: relative;
+  overflow: hidden;
+}
+
+.mission-vision-box h4 {
+  color: #5d3a1a;
+  font-size: 1.4rem;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #f0e6d2;
+  font-weight: 600;
+}
+
+.mission-vision-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 25px;
+}
+
+.mission-item,
+.vision-item {
+  position: relative;
+  padding-left: 20px;
+}
+
+.mission-item h5,
+.vision-item h5 {
+  color: #8b4513;
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+  position: relative;
+}
+
+.mission-item h5::before,
+.vision-item h5::before {
+  content: '•';
+  color: #d4af37;
+  position: absolute;
+  left: -20px;
+  font-size: 1.8rem;
+  line-height: 1;
+  top: -5px;
+}
+
+.mission-item p,
+.vision-item p {
+  color: #5d3a1a;
+  line-height: 1.7;
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .mission-vision-content {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  
+  .mission-item,
+  .vision-item {
+    padding-left: 25px;
+  }
+}
+
 .container {
   max-width: 1200px;
   margin: 0 auto;
@@ -259,27 +332,21 @@ h3 {
 .hero-content h1 {
   font-size: 5rem;
   margin-bottom: 2rem;
-  text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.8);
+  /* Remove shadow for a clean, solid look */
+  text-shadow: none;
   font-weight: 700;
   line-height: 1.1;
   letter-spacing: -0.02em;
-  background: linear-gradient(45deg, #fff 0%, #f5f5dc 50%, #fff 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  /* Solid dark text (no gradient/clip) */
+  color: #000000;
   position: relative;
 }
 
 /* Added decorative elements around the main title */
+/* Remove decorative symbols around the main title */
 .hero-content h1::before,
 .hero-content h1::after {
-  content: "✦";
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 2rem;
-  color: #d4af37;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  content: none;
 }
 
 .hero-content h1::before {
@@ -301,7 +368,8 @@ h3 {
   line-height: 1.7;
   font-weight: 400;
   font-style: italic;
-  color: #f5f5dc;
+  /* Slightly brighter cream for better readability over warm gradient */
+  color: #fff7ec;
   padding: 0 1rem;
 }
 
@@ -387,12 +455,13 @@ h3 {
   padding: 3rem;
   background: rgba(255, 255, 255, 0.9);
   border-radius: 25px;
-  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(15px);
-  border: 1px solid rgba(212, 175, 55, 0.3);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   transform: translateY(0);
-  transition: all 0.4s ease;
+  position: relative;
+  overflow: hidden;
   text-align: justify;
+  width: 100%;
 }
 
 .about-text:hover {
